@@ -27,15 +27,17 @@ import (
 
 type User struct {
 	gorm.Model
-	UserName string
-	Posts    []Post
+	UserName   string
+	PostNumber uint
+	Posts      []Post
 }
 
 type Post struct {
 	gorm.Model
-	Title    string
-	UserID   uint
-	Comments []Comment
+	Title         string
+	CommentStatus string
+	UserID        uint
+	Comments      []Comment
 
 	User User `gorm:"foreignKey:UserID"`
 }
@@ -48,13 +50,47 @@ type Comment struct {
 	Post Post `gorm:"foreignKey:PostID"`
 }
 
+// BeforeCreate 为 Post 模型添加一个钩子函数，在文章创建时自动更新用户的文章数量统计字段。
+func (p *Post) BeforeCreate(tx *gorm.DB) (err error) {
+	err = tx.Model(&User{}).
+		Where("id = ?", p.UserID).
+		Update("post_number", gorm.Expr("post_number + ?", 1)).Error
+	if err != nil {
+		fmt.Printf("更新用户文章数量失败: %v\n", err)
+		return err
+	} else {
+		return nil
+	}
+}
+
+// AfterDelete 评论删除时检查文章的评论数量，如果评论数量为 0，则更新文章的评论状态为 "无评论"
+func (c *Comment) AfterDelete(tx *gorm.DB) (err error) {
+	var count int64
+	err = tx.Model(&Comment{}).Where("post_id = ?", c.PostID).Count(&count).Error
+	if err != nil {
+		fmt.Printf("计算文章评论条数出错: %v\n", err)
+		return err
+	}
+	if count == 0 {
+		err := tx.Model(&Post{}).Where("id = ?", c.PostID).Update("comment_status", "无评论").Error
+		if err != nil {
+			fmt.Printf("更新无状态出错: %v\n", err)
+			return err
+		}
+	}
+	return nil
+}
+
 func Run() {
 	db, err := gorm.Open(sqlite.Open("gorm.db"), &gorm.Config{})
 	if err != nil {
-		fmt.Println("连接失败")
+		fmt.Printf("连接失败: %v", err)
 		return
 	}
-	db.AutoMigrate(&Post{}, &User{}, &Comment{})
+	err = db.AutoMigrate(&Post{}, &User{}, &Comment{})
+	if err != nil {
+		fmt.Printf("创建表失败: %v", err)
+	}
 
 	users := []User{
 		{
@@ -89,7 +125,11 @@ func Run() {
 			},
 		},
 	}
-	db.Save(&users)
+	err = db.Save(&users).Error
+	if err != nil {
+		fmt.Printf("写入数据失败：%v\n", err)
+		return
+	}
 
 	// 查询某个用户发布的所有文章及其对应的评论信息
 	var postInfo []Post
@@ -121,5 +161,14 @@ func Run() {
 		fmt.Println("查询失败:", err)
 	} else {
 		fmt.Printf("评论最多的文章ID: %v, 标题: %v\n", maxCommentPostInfo.ID, maxCommentPostInfo.Title)
+	}
+
+	// 测试删除评论
+	deleteComment := Comment{
+		PostID: 2,
+	}
+	err = db.Debug().Where("post_id = ?", deleteComment.PostID).Delete(&deleteComment).Error
+	if err != nil {
+		fmt.Println(err)
 	}
 }
