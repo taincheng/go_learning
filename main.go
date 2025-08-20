@@ -1,9 +1,9 @@
 package main
 
 import (
-	"go_learning/homework_3/gorm_practice1"
+	"go_learning/gin_learning/router"
 )
 
 func main() {
-	gorm_practice1.Run()
+	router.Run()
 }
