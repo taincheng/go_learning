@@ -1,9 +1,11 @@
 package router
 
 import (
+	"fmt"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
+	"github.com/gin-gonic/gin/binding"
 )
 
 // 开启服务器的简单例子
@@ -117,6 +119,89 @@ func outPut() {
 	})
 	router.Run()
 }
+
+type FormA struct {
+	UserName string `json:"u" xml:"u" query:"u" form:"u" binding:"required"`
+	Password string `json:"p" xml:"p" query:"p" form:"p"`
+}
+
+type FormB struct {
+	Job string `xml:"job" json:"job" `
+}
+
+// api 参数绑定
+func paramBind() {
+	router := gin.Default()
+	router.POST("/bind", func(c *gin.Context) {
+		var formA FormA
+		var formB FormB
+
+		// ShouldBind 自动绑定符合配置格式的参数
+		//if err := c.ShouldBind(&formA); err == nil {
+		//	fmt.Println(formA)
+		//	c.JSON(200, gin.H{
+		//		"username": formA.UserName,
+		//		"password": formA.Password,
+		//	})
+		//} else {
+		//	fmt.Println(err)
+		//}
+
+		// c.ShouldBind 使用了 c.Request.Body，不可重用。应该使用 ShouldBindWith
+		// Key: 'FormA.UserName' Error:Field validation for 'UserName' failed on the 'required' tag EOF
+		//if errA := c.ShouldBind(&formA); errA == nil {
+		//	c.String(http.StatusOK, `the body should be formA`)
+		//	// 因为现在 c.Request.Body 是 EOF，所以这里会报错。
+		//} else if errB := c.ShouldBind(&formB); errB == nil {
+		//	c.String(http.StatusOK, `the body should be formB`)
+		//} else {
+		//	fmt.Println(errA, errB)
+		//}
+
+		// 读取 c.Request.Body 并将结果存入上下文。 ShouldBindBodyWith 多次绑定
+		if errA := c.ShouldBindBodyWith(&formA, binding.JSON); errA == nil {
+			c.String(http.StatusOK, `the body should be formA`)
+			// 这时, 复用存储在上下文中的 body。可以使用其他的格式
+		} else if errB := c.ShouldBindBodyWith(&formB, binding.XML); errB == nil {
+			c.String(http.StatusOK, `the body should be formB`)
+		} else {
+			if errA != nil {
+				fmt.Printf("errA: %v", errA)
+			}
+			if errB != nil {
+				fmt.Printf("errB: %v", errB)
+			}
+		}
+
+	})
+	router.Run()
+}
+
+func handler1() gin.HandlerFunc {
+	return func(c *gin.Context) {
+		fmt.Println("handler1 before")
+		c.Next()
+		fmt.Println("handler1 after")
+	}
+}
+
+func handler2() gin.HandlerFunc {
+	return func(c *gin.Context) {
+		fmt.Println("handler2 before")
+		c.Next()
+		fmt.Println("handler2 after")
+	}
+}
+
+// 中间件
+func handlerTest() {
+	router := gin.Default()
+	router.GET("/handler", handler1(), handler2(), func(c *gin.Context) {
+		fmt.Println("self")
+		c.String(http.StatusOK, "self handler test")
+	})
+	router.Run()
+}
 func Run() {
-	outPut()
+	handlerTest()
 }
