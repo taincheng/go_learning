@@ -6,6 +6,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/gin-gonic/gin/binding"
+	"github.com/go-playground/validator/v10"
 )
 
 // 开启服务器的简单例子
@@ -193,7 +194,14 @@ func handler2() gin.HandlerFunc {
 	}
 }
 
-// 中间件
+func AuthRequired() gin.HandlerFunc {
+	return func(c *gin.Context) {
+		fmt.Println("AuthRequired")
+		c.Next()
+	}
+}
+
+// 自定义中间件
 func handlerTest() {
 	router := gin.Default()
 	router.GET("/handler", handler1(), handler2(), func(c *gin.Context) {
@@ -202,6 +210,133 @@ func handlerTest() {
 	})
 	router.Run()
 }
+
+// 使用中间件
+func useHandler() {
+	// 新建一个没有任何默认中间件的路由
+	router := gin.New()
+
+	// 全局中间件
+	// Logger 中间件将日志写入 gin.DefaultWriter，即使你将 GIN_MODE 设置为 release。
+	// By default gin.DefaultWriter = os.Stdout
+	router.Use(gin.Logger())
+
+	// Recovery 中间件会 recover 任何 panic。如果有 panic 的话，会写入 500。
+	router.Use(gin.Recovery())
+
+	// 你可以为每个路由添加任意数量的中间件。
+	router.GET("/benchmark", handler1(), handler2())
+
+	// 认证路由组
+	// authorized := router.Group("/", AuthRequired())
+	// 和使用以下两行代码的效果完全一样:
+	authorized := router.Group("/")
+	// 路由组中间件! 在此例中，我们在 "authorized" 路由组中使用自定义创建的
+	// AuthRequired() 中间件
+	authorized.Use(AuthRequired())
+	{
+		authorized.POST("/login", handler1())
+		authorized.POST("/submit", handler1())
+		authorized.POST("/read", handler1())
+
+		// 嵌套路由组
+		testing := authorized.Group("testing")
+		testing.GET("/analytics", handler1())
+	}
+
+	// 监听并在 0.0.0.0:8080 上启动服务
+	router.Run(":8080")
+}
+
+// 模拟一些私人数据
+var secrets = gin.H{
+	"foo":    gin.H{"email": "foo@bar.com", "phone": "123433"},
+	"austin": gin.H{"email": "austin@example.com", "phone": "666"},
+	"lena":   gin.H{"email": "lena@guapa.com", "phone": "523443"},
+}
+
+// 用户认证
+func authorizedTest() {
+	router := gin.Default()
+
+	// gin.BasicAuth() 是一个中间件，为整个路由组添加HTTP基本认证
+	authorized := router.Group("/admin", gin.BasicAuth(gin.Accounts{
+		"foo":    "bar",
+		"austin": "1234",
+		"lena":   "hello2",
+		"manu":   "4321",
+	}))
+
+	authorized.GET("/secrets", func(c *gin.Context) {
+		// MustGet 从上下文中获取认证用户信息
+		// .(string) 类型断言为 string，失败报错
+		user := c.MustGet(gin.AuthUserKey).(string)
+		if secret, ok := secrets[user]; ok {
+			c.JSON(http.StatusOK, gin.H{"user": user, "secret": secret})
+		} else {
+			c.JSON(http.StatusOK, gin.H{"user": user, "secret": "NO SECRET :("})
+		}
+	})
+	router.Run()
+}
+
+type LoginInfo struct {
+	Username string `json:"username" form:"username" binding:"required"` // 通过 binding 声明校验规则
+	Password string `json:"password" form:"password" binding:"number,eq=1111"`
+	Email    string `json:"email" form:"email" binding:"email"`
+}
+
+// 验证器，gin 使用 github.com/go-playground/validator/v10
+func validatorTest() {
+	r := gin.Default()
+
+	r.POST("/", func(c *gin.Context) {
+		login := LoginInfo{}
+		err := c.ShouldBind(&login)
+		if err != nil {
+			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+			return
+		}
+
+		c.JSON(http.StatusOK, login)
+	})
+
+	err := r.Run(":8080")
+	if err != nil {
+		panic(err)
+	}
+}
+
+// MyStruct ..
+type MyStruct struct {
+	Str string `json:"str" form:"str" validate:"is-awesome"`
+}
+
+// validateMyVal implements validator.Func 自定义验证器规则
+func validateMyVal(fl validator.FieldLevel) bool {
+	return fl.Field().String() == "awesome"
+}
+
+// 自定义验证器的使用
+func myValidatorTest() {
+	router := gin.Default()
+	validate := validator.New()
+	err := validate.RegisterValidation("is-awesome", validateMyVal)
+	if err != nil {
+		return
+	}
+	myStruct := MyStruct{}
+	router.POST("/", func(c *gin.Context) {
+		c.ShouldBind(&myStruct)
+		if err2 := validate.Struct(myStruct); err2 != nil {
+			c.JSON(http.StatusOK, gin.H{"error": err2.Error(), "info": "字符串不是 is-awesome"})
+		} else {
+			c.JSON(http.StatusOK, gin.H{"info": "验证通过"})
+		}
+	})
+	router.Run()
+}
+
 func Run() {
-	handlerTest()
+	myValidatorTest()
 }
