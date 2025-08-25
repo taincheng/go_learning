@@ -59,8 +59,11 @@ func UserLogin(c *gin.Context) {
 		c.JSON(http.StatusUnauthorized, gin.H{"error": "用户名或密码错误"})
 		return
 	}
+	// 将 token 放在响应头中
+	c.Header("Authorization", "Bearer "+*token)
+
 	c.JSON(http.StatusOK, gin.H{
 		"message": "登录成功",
-		"token":   token,
+		"token":   *token,
 	})
 }

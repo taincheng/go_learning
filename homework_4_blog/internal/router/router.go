@@ -20,6 +20,11 @@ func SetupRouter() *gin.Engine {
 			userGroup.POST("/register", handler.UserRegister)
 			userGroup.POST("/login", handler.UserLogin)
 		}
+		postGroup := api.Group("/post")
+		postGroup.Use(middleware.AuthMiddleware())
+		{
+			postGroup.POST("/createPost", handler.CreatePost)
+		}
 	}
 	return router
 }
