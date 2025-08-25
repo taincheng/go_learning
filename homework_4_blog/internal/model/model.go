@@ -8,9 +8,9 @@ import (
 
 type Post struct {
 	gorm.Model
-	Title   string `gorm:"size:30;not null" json:"title"`
+	Title   string `gorm:"size:30;not null;index" json:"title"`
 	Content string `gorm:"not null" json:"content"`
-	UserID  uint
+	UserID  uint   `json:"userId"`
 	User    User
 }
 

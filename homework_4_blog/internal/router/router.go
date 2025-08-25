@@ -24,6 +24,10 @@ func SetupRouter() *gin.Engine {
 		postGroup.Use(middleware.AuthMiddleware())
 		{
 			postGroup.POST("/createPost", handler.CreatePost)
+			postGroup.GET("/getPostList", handler.GetPostList)
+			postGroup.GET("/getPostInfo", handler.GetPostInfo)
+			postGroup.POST("/updatePost", handler.UpdatePost)
+			postGroup.POST("/deletePost", handler.DeletePost)
 		}
 	}
 	return router
