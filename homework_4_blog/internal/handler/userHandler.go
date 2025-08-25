@@ -1,11 +1,14 @@
 package handler
 
 import (
+	"encoding/json"
 	"homework_4_blog/internal/model"
 	"homework_4_blog/internal/service"
+	"homework_4_blog/pkg/util"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
+	"go.uber.org/zap"
 )
 
 //实现用户注册和登录功能，用户注册时需要对密码进行加密存储，登录时验证用户输入的用户名和密码。
@@ -14,8 +17,21 @@ import (
 // UserRegister 用户注册
 func UserRegister(c *gin.Context) {
 	var user model.User
+
+	var userData string
+	if userJson, jsonErr := json.Marshal(user); jsonErr == nil {
+		userData = string(userJson)
+	}
+
 	// 接受注册数据
 	if err := c.ShouldBindJSON(&user); err != nil {
+
+		util.Logger.Error(
+			"绑定注册数据失败",
+			zap.String("errMessage", err.Error()),
+			zap.String("userData", userData),
+		)
+
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
@@ -23,6 +39,7 @@ func UserRegister(c *gin.Context) {
 	// 加密密码，存储用户数据
 	err1 := service.CreateUser(&user)
 	if err1 != nil {
+		util.Logger.Error("注册用户失败", zap.String("errMessage", err1.Error()))
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "注册用户失败"})
 		return
 	}

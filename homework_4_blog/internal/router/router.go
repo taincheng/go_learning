@@ -2,6 +2,7 @@ package router
 
 import (
 	"homework_4_blog/internal/handler"
+	"homework_4_blog/internal/middleware"
 
 	"github.com/gin-gonic/gin"
 )
@@ -11,6 +12,7 @@ func SetupRouter() *gin.Engine {
 
 	// API路由分组
 	api := router.Group("/api")
+	api.Use(middleware.LoggerMiddleware())
 	{
 		// 用户相关路由
 		userGroup := api.Group("/user")
