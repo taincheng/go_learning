@@ -338,5 +338,5 @@ func myValidatorTest() {
 }
 
 func Run() {
-	myValidatorTest()
+	validatorTest()
 }

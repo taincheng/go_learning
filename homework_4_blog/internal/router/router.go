@@ -29,6 +29,12 @@ func SetupRouter() *gin.Engine {
 			postGroup.POST("/updatePost", handler.UpdatePost)
 			postGroup.POST("/deletePost", handler.DeletePost)
 		}
+		commentGroup := api.Group("/comment")
+		commentGroup.Use(middleware.AuthMiddleware())
+		{
+			commentGroup.POST("/createComment", handler.CreateComment)
+			commentGroup.GET("/getCommentList", handler.GetCommentList)
+		}
 	}
 	return router
 }

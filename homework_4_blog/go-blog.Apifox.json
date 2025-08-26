@@ -1,0 +1,1036 @@
+{
+  "apifoxProject": "1.0.0",
+  "$schema": {
+    "app": "apifox",
+    "type": "project",
+    "version": "1.2.0"
+  },
+  "info": {
+    "name": "go-blog",
+    "description": "",
+    "mockRule": {
+      "rules": [],
+      "enableSystemRule": true
+    }
+  },
+  "apiCollection": [
+    {
+      "name": "根目录",
+      "id": 64870891,
+      "auth": {},
+      "securityScheme": {},
+      "parentId": 0,
+      "serverId": "",
+      "description": "",
+      "identityPattern": {
+        "httpApi": {
+          "type": "methodAndPath",
+          "bodyType": "",
+          "fields": []
+        }
+      },
+      "shareSettings": {},
+      "visibility": "SHARED",
+      "moduleId": 6054820,
+      "preProcessors": [
+        {
+          "id": "inheritProcessors",
+          "type": "inheritProcessors",
+          "data": {}
+        }
+      ],
+      "postProcessors": [
+        {
+          "id": "inheritProcessors",
+          "type": "inheritProcessors",
+          "data": {}
+        }
+      ],
+      "inheritPostProcessors": {},
+      "inheritPreProcessors": {},
+      "items": [
+        {
+          "name": "用户",
+          "id": 64956963,
+          "auth": {},
+          "securityScheme": {},
+          "parentId": 0,
+          "serverId": "",
+          "description": "",
+          "identityPattern": {
+            "httpApi": {
+              "type": "inherit",
+              "bodyType": "",
+              "fields": []
+            }
+          },
+          "shareSettings": {},
+          "visibility": "INHERITED",
+          "moduleId": 6054820,
+          "preProcessors": [
+            {
+              "id": "inheritProcessors",
+              "type": "inheritProcessors",
+              "data": {}
+            }
+          ],
+          "postProcessors": [
+            {
+              "id": "inheritProcessors",
+              "type": "inheritProcessors",
+              "data": {}
+            }
+          ],
+          "inheritPostProcessors": {},
+          "inheritPreProcessors": {},
+          "items": [
+            {
+              "name": "用户注册",
+              "api": {
+                "id": "340382657",
+                "method": "post",
+                "path": "/api/user/register",
+                "parameters": {},
+                "auth": {},
+                "securityScheme": {},
+                "commonParameters": {
+                  "query": [],
+                  "body": [],
+                  "cookie": [],
+                  "header": []
+                },
+                "responses": [
+                  {
+                    "id": "752527885",
+                    "code": 200,
+                    "name": "成功",
+                    "headers": [],
+                    "jsonSchema": {
+                      "type": "object",
+                      "properties": {}
+                    },
+                    "description": "",
+                    "contentType": "json",
+                    "mediaType": "",
+                    "oasExtensions": ""
+                  }
+                ],
+                "responseExamples": [],
+                "requestBody": {
+                  "type": "application/json",
+                  "parameters": [],
+                  "jsonSchema": {
+                    "type": "object",
+                    "properties": {
+                      "username": {
+                        "type": "string"
+                      },
+                      "password": {
+                        "type": "string"
+                      },
+                      "email": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "username",
+                      "password",
+                      "email"
+                    ],
+                    "x-apifox-orders": [
+                      "username",
+                      "password",
+                      "email"
+                    ]
+                  },
+                  "mediaType": "",
+                  "examples": [
+                    {
+                      "mediaType": "application/json",
+                      "value": "{\n    \"username\": \"缑霞\",\n    \"password\": \"STwfzwEmPX3Q5Qd\",\n    \"email\": \"lm1sds_ijr@139.com\"\n}"
+                    }
+                  ],
+                  "oasExtensions": ""
+                },
+                "description": "用户注册",
+                "tags": [],
+                "status": "developing",
+                "serverId": "",
+                "operationId": "",
+                "sourceUrl": "",
+                "ordering": 10,
+                "cases": [],
+                "mocks": [],
+                "customApiFields": "{}",
+                "advancedSettings": {
+                  "disabledSystemHeaders": {}
+                },
+                "mockScript": {},
+                "codeSamples": [],
+                "commonResponseStatus": {},
+                "responseChildren": [
+                  "BLANK.752527885"
+                ],
+                "visibility": "INHERITED",
+                "moduleId": 6054820,
+                "oasExtensions": "",
+                "type": "http",
+                "preProcessors": [],
+                "postProcessors": [],
+                "inheritPostProcessors": {},
+                "inheritPreProcessors": {}
+              }
+            },
+            {
+              "name": "用户登录",
+              "api": {
+                "id": "340409200",
+                "method": "post",
+                "path": "/api/user/login",
+                "parameters": {},
+                "auth": {},
+                "securityScheme": {},
+                "commonParameters": {
+                  "query": [],
+                  "body": [],
+                  "cookie": [],
+                  "header": []
+                },
+                "responses": [
+                  {
+                    "id": "752561742",
+                    "code": 200,
+                    "name": "成功",
+                    "headers": [],
+                    "jsonSchema": {
+                      "type": "object",
+                      "properties": {}
+                    },
+                    "description": "",
+                    "contentType": "json",
+                    "mediaType": "",
+                    "oasExtensions": ""
+                  }
+                ],
+                "responseExamples": [],
+                "requestBody": {
+                  "type": "application/json",
+                  "parameters": [],
+                  "jsonSchema": {
+                    "type": "object",
+                    "properties": {
+                      "username": {
+                        "type": "string",
+                        "x-apifox-mock": "天浩轩"
+                      },
+                      "password": {
+                        "type": "string",
+                        "x-apifox-mock": "SVPpsu0V4PRR1KI"
+                      }
+                    },
+                    "x-apifox-orders": [
+                      "username",
+                      "password"
+                    ],
+                    "required": [
+                      "username",
+                      "password"
+                    ]
+                  },
+                  "mediaType": "",
+                  "examples": [
+                    {
+                      "mediaType": "application/json",
+                      "value": "{\n    \"username\": \"天浩轩\",\n    \"password\": \"SVPpsu0V4PRR1KI\"\n}"
+                    }
+                  ],
+                  "oasExtensions": ""
+                },
+                "description": "用户登录接口",
+                "tags": [],
+                "status": "developing",
+                "serverId": "",
+                "operationId": "",
+                "sourceUrl": "",
+                "ordering": 20,
+                "cases": [],
+                "mocks": [],
+                "customApiFields": "{}",
+                "advancedSettings": {
+                  "disabledSystemHeaders": {}
+                },
+                "mockScript": {},
+                "codeSamples": [],
+                "commonResponseStatus": {},
+                "responseChildren": [
+                  "BLANK.752561742"
+                ],
+                "visibility": "INHERITED",
+                "moduleId": 6054820,
+                "oasExtensions": "",
+                "type": "http",
+                "preProcessors": [],
+                "postProcessors": [],
+                "inheritPostProcessors": {},
+                "inheritPreProcessors": {}
+              }
+            }
+          ]
+        },
+        {
+          "name": "文章",
+          "id": 64957022,
+          "auth": {},
+          "securityScheme": {},
+          "parentId": 0,
+          "serverId": "",
+          "description": "",
+          "identityPattern": {
+            "httpApi": {
+              "type": "inherit",
+              "bodyType": "",
+              "fields": []
+            }
+          },
+          "shareSettings": {},
+          "visibility": "INHERITED",
+          "moduleId": 6054820,
+          "preProcessors": [
+            {
+              "id": "inheritProcessors",
+              "type": "inheritProcessors",
+              "data": {}
+            }
+          ],
+          "postProcessors": [
+            {
+              "id": "inheritProcessors",
+              "type": "inheritProcessors",
+              "data": {}
+            }
+          ],
+          "inheritPostProcessors": {},
+          "inheritPreProcessors": {},
+          "items": [
+            {
+              "name": "创建文章",
+              "api": {
+                "id": "340909978",
+                "method": "post",
+                "path": "/api/post/createPost",
+                "parameters": {},
+                "auth": {
+                  "type": "bearer",
+                  "bearer": {
+                    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6IuWkqea1qei9qSIsImlzcyI6Imdpbi1ibG9nIiwic3ViIjoidXNlci50b2tlbiIsImV4cCI6MTc1NjIwMDI1NCwibmJmIjoxNzU2MTEzODU0LCJpYXQiOjE3NTYxMTM4NTR9.FqVcuR3WC3HZDmrlKnNPuRrBFzK7cuFs8cQcVvtqM8M"
+                  }
+                },
+                "securityScheme": {},
+                "commonParameters": {
+                  "query": [],
+                  "body": [],
+                  "cookie": [],
+                  "header": []
+                },
+                "responses": [
+                  {
+                    "id": "753317316",
+                    "code": 401,
+                    "name": "没有权限",
+                    "headers": [],
+                    "jsonSchema": {
+                      "type": "object",
+                      "properties": {
+                        "error": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "error"
+                      ]
+                    },
+                    "description": "",
+                    "contentType": "json",
+                    "mediaType": "",
+                    "oasExtensions": ""
+                  }
+                ],
+                "responseExamples": [],
+                "requestBody": {
+                  "type": "application/json",
+                  "parameters": [],
+                  "jsonSchema": {
+                    "type": "object",
+                    "properties": {
+                      "title": {
+                        "type": "string",
+                        "x-apifox-mock": "{{$lorem.text}}"
+                      },
+                      "content": {
+                        "type": "string",
+                        "x-apifox-mock": "{{$lorem.text}}"
+                      }
+                    },
+                    "x-apifox-orders": [
+                      "title",
+                      "content"
+                    ],
+                    "required": [
+                      "title",
+                      "content"
+                    ]
+                  },
+                  "mediaType": "",
+                  "examples": [
+                    {
+                      "mediaType": "application/json",
+                      "value": "{\n    \"title\": \"天浩轩的文章A\",\n    \"content\": \"法装更指。争对除们。易离性立如办。\\n始比三族决。心价由酸。他代民和件美。\\n技则而连质接各。例机验八斗众具要算那。织海百商更车。\"\n}"
+                    }
+                  ],
+                  "oasExtensions": ""
+                },
+                "description": "",
+                "tags": [],
+                "status": "developing",
+                "serverId": "",
+                "operationId": "",
+                "sourceUrl": "",
+                "ordering": 10,
+                "cases": [],
+                "mocks": [],
+                "customApiFields": "{}",
+                "advancedSettings": {
+                  "disabledSystemHeaders": {}
+                },
+                "mockScript": {},
+                "codeSamples": [],
+                "commonResponseStatus": {},
+                "responseChildren": [
+                  "BLANK.753317316"
+                ],
+                "visibility": "INHERITED",
+                "moduleId": 6054820,
+                "oasExtensions": "",
+                "type": "http",
+                "preProcessors": [],
+                "postProcessors": [],
+                "inheritPostProcessors": {},
+                "inheritPreProcessors": {}
+              }
+            },
+            {
+              "name": "获取用户文章列表",
+              "api": {
+                "id": "340992170",
+                "method": "get",
+                "path": "/api/post/getPostList",
+                "parameters": {},
+                "auth": {
+                  "type": "bearer",
+                  "bearer": {
+                    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6IuWkqea1qei9qSIsImlzcyI6Imdpbi1ibG9nIiwic3ViIjoidXNlci50b2tlbiIsImV4cCI6MTc1NjIwMDI1NCwibmJmIjoxNzU2MTEzODU0LCJpYXQiOjE3NTYxMTM4NTR9.FqVcuR3WC3HZDmrlKnNPuRrBFzK7cuFs8cQcVvtqM8M"
+                  }
+                },
+                "securityScheme": {},
+                "commonParameters": {
+                  "query": [],
+                  "body": [],
+                  "cookie": [],
+                  "header": []
+                },
+                "responses": [
+                  {
+                    "id": "753474007",
+                    "code": 200,
+                    "name": "成功",
+                    "headers": [],
+                    "jsonSchema": {
+                      "type": "object",
+                      "properties": {}
+                    },
+                    "description": "",
+                    "contentType": "json",
+                    "mediaType": "",
+                    "oasExtensions": ""
+                  }
+                ],
+                "responseExamples": [],
+                "requestBody": {
+                  "type": "none",
+                  "parameters": [],
+                  "mediaType": "",
+                  "examples": [],
+                  "oasExtensions": ""
+                },
+                "description": "",
+                "tags": [],
+                "status": "developing",
+                "serverId": "",
+                "operationId": "",
+                "sourceUrl": "",
+                "ordering": 20,
+                "cases": [],
+                "mocks": [],
+                "customApiFields": "{}",
+                "advancedSettings": {
+                  "disabledSystemHeaders": {}
+                },
+                "mockScript": {},
+                "codeSamples": [],
+                "commonResponseStatus": {},
+                "responseChildren": [
+                  "BLANK.753474007"
+                ],
+                "visibility": "INHERITED",
+                "moduleId": 6054820,
+                "oasExtensions": "",
+                "type": "http",
+                "preProcessors": [],
+                "postProcessors": [],
+                "inheritPostProcessors": {},
+                "inheritPreProcessors": {}
+              }
+            },
+            {
+              "name": "获取文章信息",
+              "api": {
+                "id": "340998413",
+                "method": "get",
+                "path": "/api/post/getPostInfo",
+                "parameters": {
+                  "query": [
+                    {
+                      "required": false,
+                      "description": "",
+                      "type": "string",
+                      "id": "3PtXM0r40q",
+                      "enable": true,
+                      "name": "postTitle",
+                      "example": "天浩轩的文章A"
+                    }
+                  ]
+                },
+                "auth": {
+                  "type": "bearer",
+                  "bearer": {
+                    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6IuWkqea1qei9qSIsImlzcyI6Imdpbi1ibG9nIiwic3ViIjoidXNlci50b2tlbiIsImV4cCI6MTc1NjIwMDI1NCwibmJmIjoxNzU2MTEzODU0LCJpYXQiOjE3NTYxMTM4NTR9.FqVcuR3WC3HZDmrlKnNPuRrBFzK7cuFs8cQcVvtqM8M"
+                  }
+                },
+                "securityScheme": {},
+                "commonParameters": {
+                  "query": [],
+                  "body": [],
+                  "cookie": [],
+                  "header": []
+                },
+                "responses": [
+                  {
+                    "id": "753500443",
+                    "code": 200,
+                    "name": "成功",
+                    "headers": [],
+                    "jsonSchema": {
+                      "type": "object",
+                      "properties": {}
+                    },
+                    "description": "",
+                    "contentType": "json",
+                    "mediaType": "",
+                    "oasExtensions": ""
+                  }
+                ],
+                "responseExamples": [],
+                "requestBody": {
+                  "type": "none",
+                  "parameters": [],
+                  "mediaType": "",
+                  "examples": [],
+                  "oasExtensions": ""
+                },
+                "description": "",
+                "tags": [],
+                "status": "developing",
+                "serverId": "",
+                "operationId": "",
+                "sourceUrl": "",
+                "ordering": 30,
+                "cases": [],
+                "mocks": [],
+                "customApiFields": "{}",
+                "advancedSettings": {
+                  "disabledSystemHeaders": {}
+                },
+                "mockScript": {},
+                "codeSamples": [],
+                "commonResponseStatus": {},
+                "responseChildren": [
+                  "BLANK.753500443"
+                ],
+                "visibility": "INHERITED",
+                "moduleId": 6054820,
+                "oasExtensions": "",
+                "type": "http",
+                "preProcessors": [],
+                "postProcessors": [],
+                "inheritPostProcessors": {},
+                "inheritPreProcessors": {}
+              }
+            },
+            {
+              "name": "更新文章",
+              "api": {
+                "id": "341001754",
+                "method": "post",
+                "path": "/api/post/updatePost",
+                "parameters": {},
+                "auth": {
+                  "type": "bearer",
+                  "bearer": {
+                    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6IuWkqea1qei9qSIsImlzcyI6Imdpbi1ibG9nIiwic3ViIjoidXNlci50b2tlbiIsImV4cCI6MTc1NjIwMDI1NCwibmJmIjoxNzU2MTEzODU0LCJpYXQiOjE3NTYxMTM4NTR9.FqVcuR3WC3HZDmrlKnNPuRrBFzK7cuFs8cQcVvtqM8M"
+                  }
+                },
+                "securityScheme": {},
+                "commonParameters": {
+                  "query": [],
+                  "body": [],
+                  "cookie": [],
+                  "header": []
+                },
+                "responses": [
+                  {
+                    "id": "753500103",
+                    "code": 200,
+                    "name": "成功",
+                    "headers": [],
+                    "jsonSchema": {
+                      "type": "object",
+                      "properties": {}
+                    },
+                    "description": "",
+                    "contentType": "json",
+                    "mediaType": "",
+                    "oasExtensions": ""
+                  }
+                ],
+                "responseExamples": [],
+                "requestBody": {
+                  "type": "application/json",
+                  "parameters": [],
+                  "jsonSchema": {
+                    "type": "object",
+                    "properties": {
+                      "title": {
+                        "type": "string",
+                        "x-apifox-mock": "天浩轩的文章A1"
+                      },
+                      "userId": {
+                        "type": "string",
+                        "x-apifox-mock": "1"
+                      }
+                    },
+                    "x-apifox-orders": [
+                      "title",
+                      "userId"
+                    ],
+                    "required": [
+                      "title",
+                      "userId"
+                    ]
+                  },
+                  "mediaType": "",
+                  "examples": [
+                    {
+                      "mediaType": "application/json",
+                      "value": "{\r\n    \"title\": \"天浩轩的文章A1\",\r\n    \"userId\": 1,\r\n    \"id\":1\r\n}"
+                    }
+                  ],
+                  "oasExtensions": ""
+                },
+                "description": "",
+                "tags": [],
+                "status": "developing",
+                "serverId": "",
+                "operationId": "",
+                "sourceUrl": "",
+                "ordering": 40,
+                "cases": [],
+                "mocks": [],
+                "customApiFields": "{}",
+                "advancedSettings": {
+                  "disabledSystemHeaders": {}
+                },
+                "mockScript": {},
+                "codeSamples": [],
+                "commonResponseStatus": {},
+                "responseChildren": [
+                  "BLANK.753500103"
+                ],
+                "visibility": "INHERITED",
+                "moduleId": 6054820,
+                "oasExtensions": "",
+                "type": "http",
+                "preProcessors": [],
+                "postProcessors": [],
+                "inheritPostProcessors": {},
+                "inheritPreProcessors": {}
+              }
+            },
+            {
+              "name": "删除文章",
+              "api": {
+                "id": "341002668",
+                "method": "post",
+                "path": "/api/post/deletePost",
+                "parameters": {
+                  "query": [
+                    {
+                      "required": false,
+                      "description": "",
+                      "type": "integer",
+                      "id": "yVcRYJheoK",
+                      "enable": false,
+                      "name": "id",
+                      "example": "1",
+                      "schema": {
+                        "type": "integer"
+                      }
+                    },
+                    {
+                      "required": false,
+                      "description": "",
+                      "type": "integer",
+                      "id": "60iJmWmYqK",
+                      "enable": false,
+                      "name": "userId",
+                      "example": "1",
+                      "schema": {
+                        "type": "integer"
+                      }
+                    }
+                  ]
+                },
+                "auth": {
+                  "type": "bearer",
+                  "bearer": {
+                    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6IuWkqea1qei9qSIsImlzcyI6Imdpbi1ibG9nIiwic3ViIjoidXNlci50b2tlbiIsImV4cCI6MTc1NjIwMDI1NCwibmJmIjoxNzU2MTEzODU0LCJpYXQiOjE3NTYxMTM4NTR9.FqVcuR3WC3HZDmrlKnNPuRrBFzK7cuFs8cQcVvtqM8M"
+                  }
+                },
+                "securityScheme": {},
+                "commonParameters": {
+                  "query": [],
+                  "body": [],
+                  "cookie": [],
+                  "header": []
+                },
+                "responses": [
+                  {
+                    "id": "753511597",
+                    "code": 200,
+                    "name": "成功",
+                    "headers": [],
+                    "jsonSchema": {
+                      "type": "object",
+                      "properties": {}
+                    },
+                    "description": "",
+                    "contentType": "json",
+                    "mediaType": "",
+                    "oasExtensions": ""
+                  }
+                ],
+                "responseExamples": [],
+                "requestBody": {
+                  "type": "application/json",
+                  "parameters": [],
+                  "jsonSchema": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "integer",
+                        "x-apifox-mock": "1"
+                      },
+                      "userId": {
+                        "type": "integer",
+                        "x-apifox-mock": "1"
+                      }
+                    },
+                    "x-apifox-orders": [
+                      "id",
+                      "userId"
+                    ],
+                    "required": [
+                      "id",
+                      "userId"
+                    ]
+                  },
+                  "mediaType": "",
+                  "examples": [],
+                  "oasExtensions": ""
+                },
+                "description": "",
+                "tags": [],
+                "status": "developing",
+                "serverId": "",
+                "operationId": "",
+                "sourceUrl": "",
+                "ordering": 50,
+                "cases": [],
+                "mocks": [],
+                "customApiFields": "{}",
+                "advancedSettings": {
+                  "disabledSystemHeaders": {}
+                },
+                "mockScript": {},
+                "codeSamples": [],
+                "commonResponseStatus": {},
+                "responseChildren": [
+                  "BLANK.753511597"
+                ],
+                "visibility": "INHERITED",
+                "moduleId": 6054820,
+                "oasExtensions": "",
+                "type": "http",
+                "preProcessors": [],
+                "postProcessors": [],
+                "inheritPostProcessors": {},
+                "inheritPreProcessors": {}
+              }
+            }
+          ]
+        },
+        {
+          "name": "评论",
+          "id": 64988700,
+          "auth": {
+            "type": "bearer",
+            "bearer": {
+              "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6IuWkqea1qei9qSIsImlzcyI6Imdpbi1ibG9nIiwic3ViIjoidXNlci50b2tlbiIsImV4cCI6MTc1NjIwMDI1NCwibmJmIjoxNzU2MTEzODU0LCJpYXQiOjE3NTYxMTM4NTR9.FqVcuR3WC3HZDmrlKnNPuRrBFzK7cuFs8cQcVvtqM8M"
+            }
+          },
+          "securityScheme": {},
+          "parentId": 0,
+          "serverId": "",
+          "description": "",
+          "identityPattern": {
+            "httpApi": {
+              "type": "inherit",
+              "bodyType": ""
+            }
+          },
+          "shareSettings": {},
+          "visibility": "INHERITED",
+          "moduleId": 6054820,
+          "preProcessors": [
+            {
+              "id": "inheritProcessors",
+              "type": "inheritProcessors",
+              "data": {}
+            }
+          ],
+          "postProcessors": [
+            {
+              "id": "inheritProcessors",
+              "type": "inheritProcessors",
+              "data": {}
+            }
+          ],
+          "inheritPostProcessors": {},
+          "inheritPreProcessors": {},
+          "items": [
+            {
+              "name": "创建评论",
+              "api": {
+                "id": "341087728",
+                "method": "post",
+                "path": "/api/comment/createComment",
+                "parameters": {},
+                "auth": {
+                  "type": "bearer",
+                  "bearer": {
+                    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6IuWkqea1qei9qSIsImlzcyI6Imdpbi1ibG9nIiwic3ViIjoidXNlci50b2tlbiIsImV4cCI6MTc1NjIwMDI1NCwibmJmIjoxNzU2MTEzODU0LCJpYXQiOjE3NTYxMTM4NTR9.FqVcuR3WC3HZDmrlKnNPuRrBFzK7cuFs8cQcVvtqM8M"
+                  }
+                },
+                "securityScheme": {},
+                "commonParameters": {
+                  "query": [],
+                  "body": [],
+                  "cookie": [],
+                  "header": []
+                },
+                "responses": [
+                  {
+                    "id": "753651361",
+                    "code": 200,
+                    "name": "成功",
+                    "headers": [],
+                    "jsonSchema": {
+                      "type": "object",
+                      "properties": {}
+                    },
+                    "description": "",
+                    "contentType": "json",
+                    "mediaType": "",
+                    "oasExtensions": ""
+                  }
+                ],
+                "responseExamples": [],
+                "requestBody": {
+                  "type": "application/json",
+                  "parameters": [],
+                  "jsonSchema": {
+                    "type": "object",
+                    "properties": {
+                      "content": {
+                        "type": "string",
+                        "x-apifox-mock": "{{$lorem.words}}"
+                      },
+                      "postId": {
+                        "type": "integer",
+                        "x-apifox-mock": "1"
+                      }
+                    },
+                    "x-apifox-orders": [
+                      "content",
+                      "postId"
+                    ],
+                    "required": [
+                      "content",
+                      "postId"
+                    ]
+                  },
+                  "mediaType": "",
+                  "examples": [
+                    {
+                      "mediaType": "application/json",
+                      "value": "{\n    \"content\": \"风更第\",\n    \"postId\": 1\n}"
+                    }
+                  ],
+                  "oasExtensions": ""
+                },
+                "description": "",
+                "tags": [],
+                "status": "developing",
+                "serverId": "",
+                "operationId": "",
+                "sourceUrl": "",
+                "ordering": 10,
+                "cases": [],
+                "mocks": [],
+                "customApiFields": "{}",
+                "advancedSettings": {
+                  "disabledSystemHeaders": {}
+                },
+                "mockScript": {},
+                "codeSamples": [],
+                "commonResponseStatus": {},
+                "responseChildren": [
+                  "BLANK.753651361"
+                ],
+                "visibility": "INHERITED",
+                "moduleId": 6054820,
+                "oasExtensions": "",
+                "type": "http",
+                "preProcessors": [],
+                "postProcessors": [],
+                "inheritPostProcessors": {},
+                "inheritPreProcessors": {}
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "socketCollection": [],
+  "docCollection": [],
+  "webSocketCollection": [],
+  "socketIOCollection": [],
+  "responseCollection": [],
+  "schemaCollection": [],
+  "securitySchemeCollection": [],
+  "requestCollection": [
+    {
+      "name": "根目录",
+      "children": [],
+      "ordering": [
+        "requestFolder.7454126"
+      ],
+      "items": []
+    }
+  ],
+  "environments": [],
+  "commonScripts": [],
+  "globalVariables": [],
+  "commonParameters": null,
+  "projectSetting": {
+    "id": "7036479",
+    "auth": {},
+    "securityScheme": {},
+    "gateway": [],
+    "language": "zh-CN",
+    "apiStatuses": [
+      "developing",
+      "testing",
+      "released",
+      "deprecated"
+    ],
+    "mockSettings": {},
+    "preProcessors": [],
+    "postProcessors": [],
+    "advancedSettings": {
+      "enableJsonc": false,
+      "enableBigint": false,
+      "responseValidate": true,
+      "enableTestScenarioSetting": false,
+      "enableYAPICompatScript": false,
+      "isDefaultUrlEncoding": 2,
+      "publishedDocUrlRules": {
+        "defaultRule": "RESOURCE_KEY_ONLY",
+        "resourceKeyStandard": "NEW"
+      }
+    },
+    "initialDisabledMockIds": [],
+    "servers": [
+      {
+        "id": "default",
+        "name": "默认服务"
+      }
+    ],
+    "cloudMock": {
+      "security": "free",
+      "enable": false,
+      "tokenKey": "apifoxToken"
+    }
+  },
+  "customFunctions": [],
+  "projectTestCaseCategories": [
+    {
+      "id": 1174391,
+      "name": "正向"
+    },
+    {
+      "id": 1174392,
+      "name": "负向"
+    },
+    {
+      "id": 1174393,
+      "name": "边界值"
+    },
+    {
+      "id": 1174394,
+      "name": "安全性"
+    },
+    {
+      "id": 1174395,
+      "name": "其他"
+    }
+  ],
+  "projectAssociations": [],
+  "moduleSettings": [
+    {
+      "id": "6054820",
+      "name": "默认模块",
+      "moduleVariables": []
+    }
+  ]
+}
